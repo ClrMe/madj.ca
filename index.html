@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            overflow: hidden;
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .linkedin-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #0077b5;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .linkedin-button:hover {
+            background-color: #005983;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(30,30,30,1) 50%, rgba(0,0,0,1) 100%);
+            overflow: hidden;
+        }
+        .background span {
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+            animation: move 15s infinite ease-in-out;
+        }
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <script>
+            const background = document.querySelector('.background');
+            for (let i = 0; i < 200; i++) {
+                const span = document.createElement('span');
+                const size = Math.random() * 5 + 5; // Small snowflakes
+                span.style.width = `${size}px`;
+                span.style.height = `${size}px`;
+                span.style.top = `${Math.random() * 100}vh`;
+                span.style.left = `${Math.random() * 100}vw`;
+
+                // Movement behavior to avoid the cursor
+                span.addEventListener('mousemove', (e) => {
+                    const rect = span.getBoundingClientRect();
+                    const dx = rect.x + rect.width / 2 - e.clientX;
+                    const dy = rect.y + rect.height / 2 - e.clientY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        const angle = Math.atan2(dy, dx);
+                        const moveX = Math.cos(angle) * 50;
+                        const moveY = Math.sin(angle) * 50;
+                        span.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    }
+                });
+
+                span.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                background.appendChild(span);
+            }
+        </script>
+    </div>
+    <h1>Under Construction</h1>
+    <p>Thanks for visiting! This site will host my portfolio and resume at some point.</p>
+    <a class="linkedin-button" href="https://www.linkedin.com/in/madison-s-jones/" target="_blank" rel="noopener noreferrer">Visit my LinkedIn</a>
+</body>
+</html>
